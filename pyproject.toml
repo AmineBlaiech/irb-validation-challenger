@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "irbval"
+version = "0.1.0"
+description = "Outils challengers de validation IRB : qualité des données, performance des modèles PD/LGD, calculateur RWA (CRR3)"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Amine Blaiech", email = "am.blaiech@gmail.com" }]
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "scipy>=1.13",
+    "matplotlib>=3.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+irbval = "irbval.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/irbval"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "NPY", "PD"]
+ignore = ["PD010"]
